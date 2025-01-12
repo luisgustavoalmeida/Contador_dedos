@@ -4,6 +4,18 @@ import cv2
 RESOLUCAO_LARGURA = 1920  # Resolução desejada (Full HD)
 RESOLUCAO_ALTURA = 1080
 TECLA_SAIR = 27  # Código ASCII para 'ESC'
+CAMERA_INDICE = 0
+
+
+def listar_cameras_disponiveis():
+    """Lista as câmeras disponíveis no sistema."""
+    cameras_disponiveis = []
+    for indice in range(10):  # Verifica os primeiros 10 índices de dispositivo
+        captura = cv2.VideoCapture(indice)
+        if captura.isOpened():
+            cameras_disponiveis.append(indice)
+            captura.release()
+    return cameras_disponiveis
 
 
 def configurar_captura(indice_camera=0, largura=RESOLUCAO_LARGURA, altura=RESOLUCAO_ALTURA):
@@ -17,12 +29,19 @@ def configurar_captura(indice_camera=0, largura=RESOLUCAO_LARGURA, altura=RESOLU
     return captura
 
 
+# Listar e exibir as câmeras
+cameras = listar_cameras_disponiveis()
+if cameras:
+    print(f"Câmeras disponíveis: {cameras}")
+else:
+    print("Nenhuma câmera disponível.")
+
 # Configura a captura de vídeo
-video_capture = configurar_captura()
+video_capture = configurar_captura(CAMERA_INDICE)
 
 # Loop principal de captura e exibição
 while True:
-    captura_sucedida, quadro = video_capture.read()
+    captura_sucedida, quadro = video_capture.read(CAMERA_INDICE)
     if not captura_sucedida:
         print("Erro ao capturar o vídeo.")
         break

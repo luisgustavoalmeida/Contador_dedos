@@ -6,6 +6,8 @@ Este repositório contém um aplicativo desenvolvido em Python que aplica concei
 
 O software é uma demonstração prática da tecnologia **MediaPipe Hands**, uma solução de aprendizado de máquina para localização e rastreamento de landmarks das mãos.
 
+![Interface Gráfica](Imagem%20interface%20grafica.png)
+
 ---
 
 ## Descrição Geral
@@ -14,22 +16,28 @@ O script principal (main.py) utiliza técnicas de **visão computacional** para 
 
 ---
 
-## Funcionalidades
+## Funcionalidades e Mudanças Recentes
 
 - **Detecção de Múltiplas Mãos**: O sistema suporta a detecção de até **duas mãos simultâneas**.
 - **Contagem de Dedos**: Baseia-se na posição dos dedos e orientações das landmarks para identificar dedos levantados.
 - **Classificação da Mão (Esquerda/Direita)**: Determina se a mão detectada é a esquerda ou a direita.
+
 - **Renderização em Vídeo**:
     - Desenha landmarks (pontos) e conexões (linhas) das mãos.
     - Mostra o lado da mão e o número de dedos levantados diretamente no vídeo.
-- **Configurações Personalizáveis**:
+
+- **Interface Gráfica (interface.py)**:
+    - Adicionada uma interface gráfica para controle do sistema, permitindo ajustar configurações em tempo real.
+
+- **Renderização em Vídeo**:
     - Resolução da captura.
     - Tamanho da janela de vídeo.
     - Aparência visual com cores e estilos customizáveis.
 
----
-
-## Referências Técnicas
+- **Configurações Personalizáveis**:
+    - Resolução da captura.
+    - Tamanho da janela de vídeo.
+    - Aparência visual com cores e estilos customizáveis.
 
 Este projeto faz uso da biblioteca **MediaPipe**, desenvolvida pela **Google**, para a detecção de mãos. Para mais detalhes sobre como funciona o MediaPipe, suas funcionalidades e documentações oficiais, visite:
 
@@ -68,42 +76,37 @@ pip install opencv-python mediapipe
 
 2. Verifique se sua webcam está conectada ao dispositivo.
 
-3. Execute o script principal:
+3. Para iniciar a interface, execute:
    ```bash
-   python main.py
+   python interface.py
    ```
 
-4. A interface de vídeo será exibida mostrando suas mãos detectadas. O número de dedos levantados aparecerá sob um retângulo.
+4. Caso prefira executar sem a interface, execute:
+   ```bash
+   python processar_video.py
+   ```
 
-5. Para **fechar o programa**, pressione a tecla `ESC`.
+5. A interface de vídeo será exibida mostrando as mãos detectadas. O número de dedos levantados aparecerá sob um retângulo.
+
+6. Para **fechar o programa**, pressione a tecla `ESC`.
 
 ---
 
 ## Configurações Suportadas
 
-Dentro do arquivo `main.py`, os seguintes parâmetros podem ser configurados:
+Na interface gráfica implementada no arquivo `interface.py`, é possível configurar e executar as seguintes ações:
 
-```python
-# Configuração da resolução da captura
-RESOLUCAO_LARGURA_FINAL = 1920  # Largura desejada em pixels
-RESOLUCAO_ALTURA_FINAL = 1080  # Altura desejada em pixels
+- **Tamanho da tela**.
+- **Resolução**.
+- **Iniciar a execução**.
+- **Interromper a execução**.
 
-# Nome da janela de exibição
-NOME_JANELA = "Deteccao de Maos, ESC para fechar"
 
-# Tamanho inicial da janela em pixels (largura, altura)
-TAMANHO_JANELA = (1600, 900)
-
-# Estilos visuais das landmarks e conexões
-cor_linhas = desenho.DrawingSpec(color=(0, 0, 255), thickness=2)  # Cor das conexões: Azul
-cor_pontos = desenho.DrawingSpec(color=(0, 255, 0), thickness=2)  # Cor dos pontos: Verde
-```
-
-Essas configurações podem ser ajustadas para personalizar o comportamento do programa, como alterar a resolução de saída da câmera ou o estilo visual da renderização das mãos.
+Essas configurações podem ser ajustadas para personalizar o comportamento do programa, como alterar a resolução de saída da câmera ou o estilo visual da renderização da janela.
 
 ---
 
-## Principais Funções
+## Principais Funções e Melhorias
 
 O código é desenvolvido de forma modular, e algumas de suas funções principais incluem:
 
@@ -175,15 +178,15 @@ Embora o funcionamento do programa seja estável, existem algumas melhorias plan
 
 ### Problemas Atuais/Condições Específicas
 - **Reconhecimento da palma da mão vs costas da mão**:
-  - O funcionamento é perfeito quando as **palmas das mãos** estão voltadas para a câmera. No entanto, quando as **costas das mãos** são mostradas, há um problema especificamente relacionado ao **reconhecimento do dedão**.
+  - O funcionamento é perfeito quando as **palmas das mãos** estão voltadas para a câmera. Melhorias no algoritmo agora permitem a detecção correta das **costas das mãos**, solucionando problemas no **reconhecimento do dedão**.
   - O algoritmo atual presume a orientação da mão sem considerar a posição da palma versus costas da mão. Isso faz com que o dedão seja interpretado de forma incorreta em algumas situações.
 
-### Solução sugerida:
-- Desenvolver uma lógica adicional para identificar se a mão exibida está com a **palma aberta** ou as **costas voltadas para a câmera**. Isso pode ser feito avaliando as posições relativas dos landmarks.
+### Resolução:
+- Implementado um algoritmo que identifica se a mão exibida está com a **palma aberta** ou as **costas voltadas para a câmera**, analisando as posições relativas dos landmarks. Essa lógica agora está ativa por padrão.
 
 ---
 
-## Extensibilidade
+## Extensibilidade e Futuras Melhorias
 
 Este projeto pode ser expandido para várias funcionalidades adicionais, como:
 
@@ -195,11 +198,12 @@ Este projeto pode ser expandido para várias funcionalidades adicionais, como:
 
 ## Estrutura do Projeto
 
-O projeto está organizado nos seguintes arquivos:
+O projeto está organizado nos seguintes arquivos e módulos:
 
 ```text
-├── main.py             # Código principal que executa a aplicação
+├── processar_video.py             # Código principal que executa a aplicação
 ├── README.md           # Documentação completa do projeto
+├── interface.py        # Módulo que gerencia a interface gráfica e ajustes em tempo real
 └── requirements.txt    # Arquivo (opcional) para instalar dependências
 ```
 
@@ -235,5 +239,7 @@ Este projeto foi desenvolvido como um exemplo de aplicação em visão computaci
 Para dúvidas ou sugestões, sinta-se à vontade para contribuir ou entrar em contato.
 
 Mais detalhes sobre **MediaPipe** podem ser encontrados na [documentação oficial](https://ai.google.dev/edge/mediapipe/solutions/guide?hl=pt-br).
+
+Contribuições para o módulo `interface.py` e o reconhecimento das costas das mãos foram adicionadas na versão atual.
 
 ---

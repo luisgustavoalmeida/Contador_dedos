@@ -6,6 +6,7 @@ RESOLUCAO_LARGURA_FINAL = 1920
 RESOLUCAO_ALTURA_FINAL = 1080
 NOME_JANELA = "Deteccao de Maos, ESC para fechar"
 TAMANHO_JANELA = (1600, 900)
+CAMERA_INDICE = 0
 
 # Constantes
 DEDO_INDICES = [8, 12, 16, 20]  # Indicador, Médio, Anelar e Mindinho
@@ -129,20 +130,38 @@ def processa_maos(imagem, resultado, largura, altura):
             desenha_mao(imagem, lado_mao, contador_dedos, largura)
 
 
-def configurar_video_e_janela():
+def configurar_video_e_janela_local():
     """
     Configura a captura de vídeo e a exibição da janela.
     """
-    captura = cv2.VideoCapture(0)
+    captura = cv2.VideoCapture(CAMERA_INDICE)
     captura.set(cv2.CAP_PROP_FRAME_WIDTH, RESOLUCAO_LARGURA_FINAL)
     captura.set(cv2.CAP_PROP_FRAME_HEIGHT, RESOLUCAO_ALTURA_FINAL)
     cv2.namedWindow(NOME_JANELA, cv2.WINDOW_NORMAL)
     cv2.resizeWindow(NOME_JANELA, TAMANHO_JANELA[0], TAMANHO_JANELA[1])
     return captura
 
+def configurar_video_e_janela(resolucao_largura, resolucao_altura, tamanho_janela):
+    """
+    Configura a captura de vídeo e a janela de exibição para o OpenCV.
+    """
+    captura = cv2.VideoCapture(CAMERA_INDICE)
+
+    # Configura resolução da captura
+    captura.set(cv2.CAP_PROP_FRAME_WIDTH, resolucao_largura)
+    captura.set(cv2.CAP_PROP_FRAME_HEIGHT, resolucao_altura)
+
+    # Garante que a janela seja criada corretamente apenas uma vez
+    cv2.namedWindow("Stream de Mãos", cv2.WINDOW_NORMAL)
+
+    # Ajusta a dimensão da janela para os valores calculados (ex.: 16:9)
+    cv2.resizeWindow("Stream de Mãos", tamanho_janela[0], tamanho_janela[1])
+
+    return captura
+
 
 def main():
-    video_capture = configurar_video_e_janela()
+    video_capture = configurar_video_e_janela_local()
 
     while True:
         sucesso, frame = video_capture.read()
