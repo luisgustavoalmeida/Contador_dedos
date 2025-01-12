@@ -16,7 +16,7 @@ Clique na imagem abaixo para assistir à demonstração no YouTube:
 
 ## Descrição Geral
 
-O script principal (main.py) utiliza técnicas de **visão computacional** para capturar imagens da webcam, identificar mãos no quadro e contar de forma precisa o número de dedos levantados para cada mão detectada. A aplicação é construída utilizando o **MediaPipe Hands**, que fornece landmarks (pontos de referência) detalhados das mãos.
+O script principal (processar_video.py) utiliza técnicas de **Visão Computacional** para capturar imagens da webcam, identificar mãos no quadro e contar de forma precisa o número de dedos levantados para cada mão detectada. A aplicação é construída utilizando o **MediaPipe Hands**, que fornece landmarks (pontos de referência) detalhados das mãos.
 
 ---
 
