@@ -10,7 +10,7 @@ O software é uma demonstração prática da tecnologia **MediaPipe Hands**, uma
 
 Clique na imagem abaixo para assistir à demonstração no YouTube:
 
-[![Demonstração no YouTube](https://img.youtube.com/vi/mxhxQrLfid4/maxresdefault.jpg)](https://img.youtube.com/vi/mxhxQrLfid4/maxresdefault.jpg)
+[![Demonstração no YouTube](https://img.youtube.com/vi/mxhxQrLfid4/maxresdefault.jpg)](https://youtu.be/mxhxQrLfid4)
 
 ---
 
