@@ -8,6 +8,10 @@ O software é uma demonstração prática da tecnologia **MediaPipe Hands**, uma
 
 ![Interface Gráfica](Imagem%20interface%20grafica.png)
 
+Confira o vídeo de demonstração do projeto clicando no link abaixo:
+
+[Demonstração - Contagem de Dedos](Demonstração%20contagem%20de%20dedos.mp4)
+
 ---
 
 ## Descrição Geral
