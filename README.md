@@ -8,9 +8,9 @@ O software é uma demonstração prática da tecnologia **MediaPipe Hands**, uma
 
 ![Interface Gráfica](Imagem%20interface%20grafica.png)
 
-Confira o vídeo de demonstração do projeto clicando no link abaixo:
+Clique na imagem abaixo para assistir à demonstração no YouTube:
 
-[Demonstração - Contagem de Dedos](https://youtu.be/mxhxQrLfid4)
+[![Demonstração no YouTube](https://img.youtube.com/vi/mxhxQrLfid4/maxresdefault.jpg)](https://img.youtube.com/vi/mxhxQrLfid4/maxresdefault.jpg)
 
 ---
 
