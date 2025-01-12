@@ -70,7 +70,7 @@ pip install opencv-python mediapipe
 
 1. Clone este repositório para o seu computador:
    ```bash
-   git clone https://github.com/seu-usuario/contador-dedos.git
+   git clone https://github.com/luisgustavoalmeida/Contador_dedos.git
    cd contador-dedos
    ```
 
