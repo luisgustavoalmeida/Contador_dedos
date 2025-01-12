@@ -28,28 +28,28 @@ def configurar_captura(indice_camera=0, largura=RESOLUCAO_LARGURA, altura=RESOLU
     print(f"Resolução configurada: {resolucao_largura}x{resolucao_altura}")
     return captura
 
+if __name__ == "__main__":
+    # Listar e exibir as câmeras
+    cameras = listar_cameras_disponiveis()
+    if cameras:
+        print(f"Câmeras disponíveis: {cameras}")
+    else:
+        print("Nenhuma câmera disponível.")
 
-# Listar e exibir as câmeras
-cameras = listar_cameras_disponiveis()
-if cameras:
-    print(f"Câmeras disponíveis: {cameras}")
-else:
-    print("Nenhuma câmera disponível.")
+    # Configura a captura de vídeo
+    video_capture = configurar_captura(CAMERA_INDICE)
 
-# Configura a captura de vídeo
-video_capture = configurar_captura(CAMERA_INDICE)
+    # Loop principal de captura e exibição
+    while True:
+        captura_sucedida, quadro = video_capture.read()
+        if not captura_sucedida:
+            print("Erro ao capturar o vídeo.")
+            break
 
-# Loop principal de captura e exibição
-while True:
-    captura_sucedida, quadro = video_capture.read(CAMERA_INDICE)
-    if not captura_sucedida:
-        print("Erro ao capturar o vídeo.")
-        break
+        cv2.imshow("Melhor Resolucao da Camera - ESC para sair", quadro)
+        if cv2.waitKey(1) & 0xFF == TECLA_SAIR:
+            break
 
-    cv2.imshow("Melhor Resolucao da Camera - ESC para sair", quadro)
-    if cv2.waitKey(1) & 0xFF == TECLA_SAIR:
-        break
-
-# Liberar captura e fechar janelas
-video_capture.release()
-cv2.destroyAllWindows()
+    # Liberar captura e fechar janelas
+    video_capture.release()
+    cv2.destroyAllWindows()

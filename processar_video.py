@@ -1,6 +1,7 @@
+import time
 import cv2
 import mediapipe as mp
-import datetime
+from teste_camera import listar_cameras_disponiveis
 
 # Define constantes para configuração
 RESOLUCAO_LARGURA_FINAL = 1920
@@ -203,6 +204,12 @@ def main():
         sucesso, frame = video_capture.read()
         if not sucesso or frame is None:
             print("Erro ao capturar o vídeo.")
+            cameras = listar_cameras_disponiveis()
+            if cameras:
+                print(f"Câmeras disponíveis: {cameras}")
+            else:
+                print("Nenhuma câmera disponível.")
+            time.sleep(5)
             continue
 
         # Processa o frame
