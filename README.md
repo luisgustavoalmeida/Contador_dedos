@@ -201,7 +201,7 @@ Este projeto pode ser expandido para várias funcionalidades adicionais, como:
 O projeto está organizado nos seguintes arquivos e módulos:
 
 ```text
-├── processar_video.py             # Código principal que executa a aplicação
+├── processar_video.py  # Código principal que executa a aplicação
 ├── README.md           # Documentação completa do projeto
 ├── interface.py        # Módulo que gerencia a interface gráfica e ajustes em tempo real
 └── requirements.txt    # Arquivo (opcional) para instalar dependências
