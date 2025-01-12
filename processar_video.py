@@ -1,5 +1,6 @@
 import cv2
 import mediapipe as mp
+import datetime
 
 # Define constantes para configuração
 RESOLUCAO_LARGURA_FINAL = 1920
@@ -95,7 +96,7 @@ def desenha_mao(imagem, lado_mao, contador_dedos, largura):
     cv2.putText(imagem, f"Dedos: {contador_dedos}", (start_x + 10, start_y + 80), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
 
 
-def processa_maos(imagem, resultado, largura, altura):
+def processa_maos(imagem, resultado, largura, altura, log_habilitado=False):
     """
     Processa as mãos detectadas na imagem.
 
@@ -129,6 +130,40 @@ def processa_maos(imagem, resultado, largura, altura):
             contador_dedos = conta_dedos(pontos, lado_mao)
             desenha_mao(imagem, lado_mao, contador_dedos, largura)
 
+            # Gera log dos pontos e informações adicionais, se solicitado
+            if log_habilitado:
+                pontos_log = {f"ID_{id}": (cx, cy) for id, (cx, cy) in enumerate(pontos)}
+                gerar_log({
+                    "Lado da Mão": lado_mao,
+                    "Contador de Dedos": contador_dedos,
+                    "Pontos das Landmarks": pontos_log,
+                })
+
+
+def gerar_log(dados, caminho_arquivo="log_deteccao.txt"):
+    """
+    Gera um arquivo de log com os dados fornecidos.
+
+    Args:
+        dados (dict ou str): Dados a serem registrados no log. Pode ser um dicionário ou uma string.
+        caminho_arquivo (str): Caminho do arquivo de log. Default é 'log_deteccao.txt'.
+
+    Returns:
+        None
+    """
+    try:
+        with open(caminho_arquivo, "a") as arquivo_log:
+            # Escreve a data e hora atual
+            arquivo_log.write(f"[{datetime.datetime.now()}] - Log:\n")
+            if isinstance(dados, dict):  # Caso os dados sejam um dicionário
+                for chave, valor in dados.items():
+                    arquivo_log.write(f"  {chave}: {valor}\n")
+            elif isinstance(dados, str):  # Caso seja uma string
+                arquivo_log.write(f"  {dados}\n")
+            arquivo_log.write("\n")  # Linha em branco para separar
+    except Exception as e:
+        print(f"Erro ao gerar log: {e}")
+
 
 def configurar_video_e_janela_local():
     """
@@ -140,6 +175,7 @@ def configurar_video_e_janela_local():
     cv2.namedWindow(NOME_JANELA, cv2.WINDOW_NORMAL)
     cv2.resizeWindow(NOME_JANELA, TAMANHO_JANELA[0], TAMANHO_JANELA[1])
     return captura
+
 
 def configurar_video_e_janela(resolucao_largura, resolucao_altura, tamanho_janela):
     """
@@ -173,7 +209,7 @@ def main():
         frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         resultado = maos.process(frame_rgb)
         altura, largura, _ = frame.shape
-        processa_maos(frame, resultado, largura, altura)
+        processa_maos(frame, resultado, largura, altura, log_habilitado=False)
         cv2.imshow(NOME_JANELA, frame)
 
         if cv2.waitKey(1) & 0xFF == 27:  # Tecla Esc para fechar

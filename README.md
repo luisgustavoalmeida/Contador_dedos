@@ -32,12 +32,12 @@ O script principal (main.py) utiliza técnicas de **visão computacional** para 
 - **Renderização em Vídeo**:
     - Resolução da captura.
     - Tamanho da janela de vídeo.
-    - Aparência visual com cores e estilos customizáveis.
 
 - **Configurações Personalizáveis**:
     - Resolução da captura.
     - Tamanho da janela de vídeo.
-    - Aparência visual com cores e estilos customizáveis.
+    - Escolha de gerar log.
+
 
 Este projeto faz uso da biblioteca **MediaPipe**, desenvolvida pela **Google**, para a detecção de mãos. Para mais detalhes sobre como funciona o MediaPipe, suas funcionalidades e documentações oficiais, visite:
 
@@ -100,6 +100,7 @@ Na interface gráfica implementada no arquivo `interface.py`, é possível confi
 - **Resolução**.
 - **Iniciar a execução**.
 - **Interromper a execução**.
+- **Escolha de gerar log**
 
 
 Essas configurações podem ser ajustadas para personalizar o comportamento do programa, como alterar a resolução de saída da câmera ou o estilo visual da renderização da janela.

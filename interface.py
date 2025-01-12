@@ -9,9 +9,12 @@ class AppInterface:
     def __init__(self, root):
         self.root = root
         self.root.title("Controle de Detecção de Mãos")
-        self.root.geometry("400x300")
+        self.root.geometry("400x350")
         self.running = False
         self.video_thread = None
+
+        # Variável para controlar o log
+        self.generate_log = tk.BooleanVar(value=False)  # Inicialmente desativado (False)
 
         # Botões
         self.start_button = ttk.Button(root, text="Iniciar Detecção", command=self.start_video)
@@ -41,6 +44,15 @@ class AppInterface:
         self.slider_window.set(1600)
         self.slider_window.pack()
 
+        # Opção de Gerar Log
+        ttk.Checkbutton(
+            root,
+            text="Gerar Log",
+            variable=self.generate_log,  # Variável vinculada ao estado do checkbox
+            onvalue=True,  # Valor se a checkbox for ativada
+            offvalue=False  # Valor se a checkbox for desativada
+        ).pack(pady=10)
+
     def start_video(self):
         if not self.running:
             self.running = True
@@ -57,6 +69,9 @@ class AppInterface:
         self.status_label.config(text=f"Tamanho da janela ajustado para {new_size}px")
 
     def run_video(self):
+        # Verifica se o log está ativado
+        gerar_log = self.generate_log.get()
+
         # Extraindo valores da interface gráfica
         resolucao_str = self.selected_res.get()  # Exemplo: "1920x1080"
         resolucao_largura, resolucao_altura = map(int, resolucao_str.split("x"))
@@ -78,8 +93,7 @@ class AppInterface:
             frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             resultado = maos.process(frame_rgb)
             altura, largura, _ = frame.shape
-            processa_maos(frame, resultado, largura, altura)
-
+            processa_maos(frame, resultado, largura, altura, log_habilitado=gerar_log)
             cv2.imshow("Stream de Mãos", frame)
 
             # Parar ao pressionar Esc
