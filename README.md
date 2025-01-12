@@ -235,4 +235,5 @@ Este projeto foi desenvolvido como um exemplo de aplicação em visão computaci
 Para dúvidas ou sugestões, sinta-se à vontade para contribuir ou entrar em contato.
 
 Mais detalhes sobre **MediaPipe** podem ser encontrados na [documentação oficial](https://ai.google.dev/edge/mediapipe/solutions/guide?hl=pt-br).
+
 ---
