@@ -1,4 +1,4 @@
-# Contador de Dedos - Detecção de Mãos com MediaPipe e OpenCV
+# Visão Computacional - Contador de Dedos Detecção de Mãos com MediaPipe e OpenCV
 
 Este projeto tem como objetivo detectar mãos e contar o número de dedos levantados em tempo real utilizando as bibliotecas **MediaPipe** e **OpenCV**.
 
