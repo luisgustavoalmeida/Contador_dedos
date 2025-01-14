@@ -245,6 +245,4 @@ Para dúvidas ou sugestões, sinta-se à vontade para contribuir ou entrar em co
 
 Mais detalhes sobre **MediaPipe** podem ser encontrados na [documentação oficial](https://ai.google.dev/edge/mediapipe/solutions/guide?hl=pt-br).
 
-Contribuições para o módulo `interface.py` e o reconhecimento das costas das mãos foram adicionadas na versão atual.
-
 ---
